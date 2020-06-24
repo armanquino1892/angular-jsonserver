@@ -1,0 +1,144 @@
+<style>
+    .container {
+        width: 1000px;
+    }
+    
+    .my-custom-scrollbar {
+        position: relative;
+        height: 200px;
+        overflow: auto;
+    }
+    
+    .table-wrapper-scroll-y {
+        display: block;
+    }
+    
+    .card-height {
+        height: 272px;
+    }
+</style>
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="card ">
+                <div class="card-header">
+                    Add/Edit User
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" #formDir="ngForm" novalidate>
+                        <div class="form-row mb-3">
+                            <div class="col-md-6">
+                                <label for="Name">Name:</label>
+                                <input class="form-control" type="text" formControlName="name" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="userName">User Name:</label>
+                                <input class="form-control" type="text" formControlName="username" />
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col-md-12">
+                                <label for="email">Email:</label>
+                                <input class="form-control" type="text" formControlName="email" />
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col-md-12">
+                                <label for="street">Street:</label>
+                                <input class="form-control" type="text" formControlName="street" />
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col-md-12">
+                                <label for="suite">Suite:</label>
+                                <input class="form-control" type="text" formControlName="suite" />
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col-md-12">
+                                <label for="city">City:</label>
+                                <input class="form-control" type="text" formControlName="city" />
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col-md-12">
+                                <label for="zipcode">Zip Code:</label>
+                                <input class="form-control" type="text" formControlName="zipcode" />
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary mr-1">Save</button>
+                            <button type="button" class="btn btn-secondary" (click)="onNew()">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-3 card-height">
+                <div class="card-header">
+                    User List
+                </div>
+                <div class="card-body table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users">
+                                <td scope="row">{{ user.id }}</td>
+                                <td scope="row">{{ user.name }}</td>
+                                <td scope="row">
+                                    <div>
+                                        <button type="button" class="btn btn-primary mr-1" (click)="viewUserDetails(user)">View</button>
+                                        <button type="button" class="btn btn-danger mr-1" (click)="deleteUser(user)">Delete</button>
+                                        <button type="button" class="btn btn-warning" (click)="editUser(user)">Edit</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card" style="height: 337px;">
+                <div class="card-header">
+                    User Details
+                </div>
+                <div class="card-body">
+                    <div>
+                        <dl class="row">
+                            <dt class="col-sm-3">Name:</dt>
+                            <dd class="col-sm-9">{{ userDetails ? userDetails.name : " " }}</dd>
+
+                            <dt class="col-sm-3">UserName:</dt>
+                            <dd class="col-sm-9">{{ userDetails ? userDetails.username : " "}}</dd>
+
+                            <dt class="col-sm-3">Email:</dt>
+                            <dd class="col-sm-9">{{ userDetails ? userDetails.email : " " }}</dd>
+                        </dl>
+                        <label><b>Address:</b></label>
+                        <div class="row">
+                            <dt class="col-sm-3">Street:</dt>
+                            <dd class="col-sm-9">{{ userDetails ? userDetails.address.street : " " }}</dd>
+
+                            <dt class="col-sm-3">Suite:</dt>
+                            <dd class="col-sm-9">{{ userDetails ? userDetails.address.suite : " " }}</dd>
+
+                            <dt class="col-sm-3">City:</dt>
+                            <dd class="col-sm-9">{{ userDetails ? userDetails.address.city : " " }}</dd>
+
+                            <dt class="col-sm-3">Zip Code:</dt>
+                            <dd class="col-sm-9">{{ userDetails ? userDetails.address.zipcode : " " }}</dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
