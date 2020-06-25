@@ -8,11 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './services/data.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastService } from './services/toast/toast-service';
+import { ToastsContainerComponent } from './components/toast/toasts-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent
+    UsersComponent,
+    ToastsContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [DataService],
+  providers: [DataService, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

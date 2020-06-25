@@ -1,19 +1,18 @@
 import { Component, OnInit, PipeTransform } from '@angular/core';
 
 import { DataService } from 'src/app/services/data.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IUser } from 'src/app/models/user.model';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
-import { startWith } from 'rxjs/operators';
+import { startWith, debounceTime } from 'rxjs/operators';
 import { IPosts } from 'src/app/models/posts.model';
 import { isBuffer } from 'util';
+import { ToastService } from 'src/app/services/toast/toast-service';
 
 const routes = {
   userAPIPath: 'users'
 
 }
-
-declare var ol: any;
 
 @Component({
   selector: 'app-users',
@@ -27,14 +26,16 @@ form: FormGroup;
   postDetails: IPosts;
   filter = new FormControl('');
   userId: number = 0;
-  constructor(private formBuilder: FormBuilder, private dataService: DataService) {
+
+  constructor(private formBuilder: FormBuilder, private dataService: DataService,
+    private toastService: ToastService) {
 
     this.createFormGroup();
    }
 
   ngOnInit() {
     this.getUsers();
-    console.log(this.form.controls);
+
   }
 
   createFormGroup() {
@@ -79,6 +80,7 @@ if(id <= 0){
   console.log('post');
   this.dataService.post<IUser>(routes.userAPIPath, userDetails).toPromise().then(data => {
     console.log('success', data);
+    this.toastService.show('Save Success', { classname: 'bg-success text-light'});
     this.form.reset();
     this.getUsers();
   })
@@ -86,12 +88,11 @@ if(id <= 0){
   console.log('put');
   this.dataService.put<IUser>(routes.userAPIPath + "/" + id, userDetails ).toPromise().then(data => {
     console.log('success', data);
+    this.toastService.show('Update Success', { classname: 'bg-success text-light', delay: 5000 });
     this.form.reset();
     this.getUsers();
   })
 }
-
-
   }
 
   getUsers(){
@@ -105,6 +106,7 @@ if(id <= 0){
     console.log(user);
     this.dataService.delete(routes.userAPIPath + "/" + user.id).toPromise().then(data => {
       console.log('success', data);
+      this.toastService.show('Delete Success', { classname: 'bg-success text-light', delay: 5000 });
       this.form.reset();
       this.getUsers();
     })

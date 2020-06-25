@@ -31,18 +31,6 @@
           "lng": "-34.4618"
         }
       }
-    },
-    {
-      "id": 3,
-      "name": "test1",
-      "username": "test",
-      "email": "test",
-      "address": {
-        "street": "test",
-        "city": "test",
-        "suite": "test",
-        "zipcode": "test"
-      }
     }
   ],
   "posts": [
