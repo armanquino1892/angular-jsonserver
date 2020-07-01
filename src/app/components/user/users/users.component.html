@@ -2,27 +2,28 @@
     .container {
         width: 1000px;
     }
-    
+
     .my-custom-scrollbar {
         position: relative;
         height: 200px;
         overflow: auto;
     }
-    
+
     .table-wrapper-scroll-y {
         display: block;
     }
-    
+
     .card-height {
         height: 272px;
     }
-    
-    
+
+    .form-group.required .control-label:after {
+        content: "*";
+        color: red;
+    }
 </style>
 
 <div class="container">
-
-    
     <div class="row mb-3">
         <div class="col-md-6">
             <div class="card ">
@@ -31,20 +32,22 @@
                 </div>
                 <div class="card-body">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" #formDir="ngForm" novalidate>
-                        <div class="form-row mb-3">
-                            <div class="col-md-6">
-                                <label for="Name">Name:</label>
-                                <input class="form-control" type="text" formControlName="name" />
-                            </div>
-                            <div class="col-md-6">
-                                <label for="userName">User Name:</label>
-                                <input class="form-control" type="text" formControlName="username" />
+                        <div class="form-row">
+                            <div class="col-md-12 form-group required">
+                                <label for="name" class="control-label">Name:</label>
+                                <input class="form-control" type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && this.form.get('name').errors }" />
+                                <div *ngIf="submitted  && this.form.get('name').errors" class="invalid-feedback">
+                                    <div *ngIf="this.form.get('name').errors.required">Name is required</div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row mb-3">
-                            <div class="col-md-12">
-                                <label for="email">Email:</label>
-                                <input class="form-control" type="text" formControlName="email" />
+                            <div class="col-md-12 form-group required">
+                                <label for="email" class="control-label">Email:</label>
+                                <input class="form-control" type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && this.form.get('email').errors }" />
+                                <div *ngIf="submitted && this.form.get('email').errors" class="invalid-feedback">
+                                    <div *ngIf="this.form.get('email').errors.required">Email is required</div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row mb-3">
@@ -118,9 +121,6 @@
                         <dl class="row">
                             <dt class="col-sm-3">Name:</dt>
                             <dd class="col-sm-9">{{ userDetails ? userDetails.name : " " }}</dd>
-
-                            <dt class="col-sm-3">UserName:</dt>
-                            <dd class="col-sm-9">{{ userDetails ? userDetails.username : " "}}</dd>
 
                             <dt class="col-sm-3">Email:</dt>
                             <dd class="col-sm-9">{{ userDetails ? userDetails.email : " " }}</dd>
