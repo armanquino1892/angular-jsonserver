@@ -13,7 +13,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run "npm run start:proxy:mock:server" to run the project and the mock server. 
+Run `npm run start:proxy:mock:server` to run the project and the mock server. 
 
 ![](AngularJson.jpeg)
 
