@@ -1,6 +1,7 @@
 # AngularJson
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
+This project is a practice Project where I explore basic CRUD operations in an Angular 9 application and REST API with JSON Server.
+
 
 ## Development server
 
@@ -12,15 +13,9 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `npm run start:proxy:mock:server` to run the project and the mock server. 
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+![](AngularJson.jpeg)
 
 ## Further help
 
